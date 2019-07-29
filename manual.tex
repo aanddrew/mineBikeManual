@@ -1,0 +1,86 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx}
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=blue,  %choose some color if you want links to stand out
+}
+
+%verbatim stuff
+\usepackage{fancyvrb}
+
+
+%step enumaration
+\usepackage{enumitem}
+\newlist{steps}{enumerate}{1}
+\setlist[steps, 1]{label = \textbf{Step \arabic*:}}
+
+%page break after sections
+\usepackage{titlesec}
+\newcommand{\sectionbreak}{\clearpage}
+
+%remove indentation at Paragraph and add line break
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+
+\title{MineBike Game Documentation}
+\author{Andrew Weller \& [your name here]}
+\date{July 2019}
+
+\setcounter{section}{-1}
+
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\section{This Manual}
+Hello anonymous developer! Welcome to the MineBike project. If this is not your desired destination you may leave this document now.
+
+This manual is intended to inform the user about the mineBike GAME portion of the code. This manual does not relate to the middleware or the database portion.
+If you are looking for documentation on that, you should search elsewhere.
+
+If you are not already aware of what the project is, mineBike is a minecraft mod designed as an alternative to traditional physical therapy for quarantined hospital patients who are unable to go outside to excercise. 
+
+Please refer to the table of contents if you wish to find what you are looking for quickly. Otherwise reading this manual in chronological order should get you up to speed with the game with zero prior knowledge.
+
+\section {Setup}
+\begin{steps}
+  \item Clone Repository
+		\begin{verbatim}
+				$ git clone https://github.com/andrewwellercs/mineBikeCopy
+		\end{verbatim}
+
+  \item Unzip Forge Source
+
+		Unzip "MinecraftMod/Forge Source/forge-1.7.10-10.13.4.1492-1.7.10-src.zip" into "MinecraftMod/".
+
+		Be sure to overwrite any files.
+  \item Run gradle scripts
+
+		Unix:
+	\begin{verbatim}
+		$ ./gradlew setupDecompWorkspace --refresh-dependencies
+
+		$ ./gradlew eclipse
+	\end{verbatim}
+\end{steps}
+
+\section {Codebase Tour}
+\begin{figure}[h]
+	\includegraphics[scale=0.5]{images/will_smith_with_camera}
+	\centering
+\end{figure}
+The Codebase looks very big, but there are only a few very important parts to it.
+\begin{figure}[h]
+	\includegraphics[scale=0.5]{images/will_smith_with_camera}
+	\centering
+\end{figure}
+
+
+\end{document}
+
