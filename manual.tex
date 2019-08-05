@@ -131,9 +131,49 @@ Adding Npcs to the overworld is easy.
 	\centering
 \end{figure}
 
+You can add your own npc by creating a new class the extends the class {\bfseries CustomNpcAbstract}. Located in the package {\bfseries org.ngs.bigx.minecraft.npcs.custom}.
 
+\begin{figure}[h]
+	\caption{The CustomNpcAbstract class}
+	\includegraphics[scale=0.5]{images/npcs/CustomNpcAbstract.png}
+	\centering
+\end{figure}
+
+There are three protected variables inside this class that should be set in the constructor in order for this class to work as intended. 
+
+\begin{verbatim}
+		protected String name;
+\end{verbatim}
+
+This variable will change the display name of the npc in game. It is also used as an identifier in other pieces of the code so it should be {\bfseries unique} and not overlap with any other npcs that exist either in the {\bfseries CustomNPCStorage} class or the {\bfseries NpcDatabase} class, located in org.ngs.bigx.minecraft.npcs.custom and org.ngs.bigx.minecraft.npcs packages respectively.
+
+\begin{verbatim}
+	protected Vec3 location;	
+\end{verbatim}
+
+This variable will change the location that the npc spawns at in the overworld. It should be created with the Vec3.createVectorHelper method.
+
+\begin{verbatim}
+		protected String texture;
+\end{verbatim}
+
+This variable will change the texture that the npc has in the game. It should be a file location of an image. It technically shouldn't matter where the image is located but sometimes it doesn't work if the images is in a weird folder. In order to guarantee that it works it should be located somewhere in the src/main/resources/assets/customnpcs/ folders, by convention all the skins for customnpcs have been placed inside of the .../customnpcs/textures/entity/ folders
+
+The variable must be set in a certain way. In order to set the texture to a texture in customnpcs/textures/entity/humanmale/ the texture variable should be set as follows: \begin{verbatim} customnpcs:textures/entity/humanmale/Example_Texture.png \end{verbatim}
+
+You can find new textures online by searching for "minecraft skins" online. Note that you will have to find one that is in the right format for the version of the game this mod is using - 1.7.10.
+
+Here is an example of an Npc made using this formula. You can also view this in the project as Raul.java in org.ngs.bigx.minecraft.npcs.custom
+
+\begin{figure}[h]
+	\caption{An example of an npc made with the CustomNpcAbstract}
+	\includegraphics[scale=0.3]{images/npcs/Raul_Java.png}
+	\centering
+\end{figure}
 
 \subsection{Advanced Npcs (quests/moving)}
+
+If you wish to add an Npc that {\emph does \emph something} into the game, continue reading.
 
 \section{Quests}
 \label{sec:quests}
