@@ -374,5 +374,39 @@ When the npc is interacted with, it calls the {\bfseries start()} method in the 
 \section{Hud}
 \label{sec:hud}
 
+The Minigames all feature various Hud elements like rectangles, text, and textures. There are different ways to accomplish this and if you want to do it your own way, \href {https://jabelarminecraft.blogspot.com/p/minecraft-modding-block-with-simple-gui.html}{this is a good starting point.}
+
+There are tools made by yours truly that you can use to add Hud to your game without knowledge of OpenGL or the minecraft rendering pipeline.
+
+Enter the Hud Manager.
+
+\subsection{The Hud Manager}
+
+The Hud Manager, seen in {\bfseries HudManager.java} in {\bfseries (org.ngs.bigx.minecraft.client.gui.hud)} is a simple GuiScreen class which has built in tools to draw {\bfseries three} different hud elements. There are rectangles, text, and textures.
+
+Each of these different elements in the HudManager have three classes that correspond to them, and two methods to register and unregister them respectively.
+
+All of the classes talked about in this section are in {\bfseries org.ngs.bigx.minecraft.client.gui.hud}.
+
+\subsection{HudRectangle}
+
+The HudRectangle class (in {\bfseries org.ngs.bigx.minecraft.client.gui.hud}) can be used to fill a rectangle of a solid color on the screen. Noteable uses of this are in the Fishing minigame (for the gui on the fishing rod) and in the Soccer Quest (for the color behind the scoreboard elements).
+
+The class only has 
+
+\subsection{CenterX and CenterY}
+
+This has its own section because it is kind of confusing.
+
+All of the HudManager helper classes (HudRectangle, HudString, HudTexture) have two data members called CenterX and CenterY. When these variables are true, it will turn the x and y coordinates of the class into {\emph relative} coordinates with respect to the center of the screen. *Such that the x and y values are now x + (screenwidth / 2) and y + (screenwidth / 2) respectively.
+
+*There is a special case for the HudString. If you have CenterX enabled the text will be centered automatically based off of its width on the screen. So if you want centered text, just leave x = 0 and flip centerX on.
+
+For example, if the screen resolution is 1920x1080, and I wish to place a HudRectangle right below the player's crosshair, I would create a HudRectangle and set x and y to be 0. Then the top left corner of the rectangle would be on the crosshair in the center of the screen.
+
+Or if you want to have a box that is at the top of the screen in the center. You would just enable centerX and have centerY disabled, example x and y coordinates could be like -50, 100.
+
+It is good practice to use these variables so that a changing screen resolution will not screw with your hud.
+
 \end{document}
 
