@@ -290,7 +290,13 @@ Here is an example of an Npc made using this formula. You can also view this in 
 
 \subsection{Advanced Npcs (quests/moving)}
 
-If you wish to add an Npc that {\emph does \emph something} into the game, continue reading.
+If you wish to add an Npc that {\emph does \emph something} into the game, there are tools available for that.
+
+There is a mod in the codebase which has been slightly modified in house called CustomNpcs (in the noppes package).
+
+It is hard to outline specifically what to do to create something using these tools since I (the author of this manual) was not in contact with the creators and it is a relatively niche mod with not much help for it online.
+
+The best way to learn how it works would be to look through other sections of code that use it like {\bfseries SoccerQuest or TRONQuest} from \\ {\bfseries org.ngs.bigx.minecraft.quests.custom}. 
 
 \section{Quests}
 \label{sec:quests}
@@ -408,5 +414,39 @@ Or if you want to have a box that is at the top of the screen in the center. You
 
 It is good practice to use these variables so that a changing screen resolution will not screw with your hud.
 
+\section{Making the Game Multiplayer}
+The game currently only works via single player. I (The original writer of this manual) do not have the extensive knowledge of minecraft required to outline this in full, however I can lead the implementer in the right direction.
+
+\subsection{Minecraft Server Client Model}
+
+Minecraft can technically be a single player game, however it does not work the same way that a traditional single player game works. Minecraft runs an internal server which the player connects to just the same as if they were connecting to an external server.
+
+The implications of this are that when writing a minecraft mod, the author of this mod has access to both the internal server that minecraft runs and the client that it is running.
+
+\subsection {In Practice}
+In practice this means that all game objects accessed within the mod are either on the server or on the client.
+
+Many objects have a way to detect if they exist on the client or on the server. 
+
+This is the isRemote() method. It should only be found on objects that are relevant such as Worlds or Entities that have to be updated by the server.
+
+For example a world object which holds a single dimension has this method. In all of the quests in {\bfseries org.ngs.bigx.minecraft.quests.custom} the onWorldTickEvent method has this line:
+
+\begin{verbatim}
+	if (event.world.provider.worldObj.isRemote)
+		return;
+\end{verbatim}
+
+If an object is remote, that means it is remote from the server, therefore it exitst on the client.
+
+So objects that are remote should not be accessed unless it is for client specific things like hud if the game is to become multiplayer.
+
+Other than that I would look at some resources for developing multiplayer minecraft forge mods and developing mods for a minecraft forge server.
+
+That's about as far as my knowledge goes for this. Good luck if you decide to tak this path.
+
 \end{document}
+
+
+
 
